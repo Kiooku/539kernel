@@ -1,10 +1,18 @@
 # 539kernel
 Creation of an operating system for learning purposes following the [539kernel book](https://539kernel.com/).
 
+> [!WARNING]
+> Work in progress
+
 # Table of Contents
-1. [Glossary](#glossary)
-2. [Other Information](#assembly-information)
+1. [Prerequisite](#prerequisite)
+2. [Glossary](#glossary)
+3. [Assembly Information](#assembly-information)
 3. [Resources](#resources)
+
+# Prerequisite
+
+Install [QEMU](https://www.qemu.org/download/).
 
 # Glossary
 
