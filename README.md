@@ -40,7 +40,69 @@ Install [QEMU](https://www.qemu.org/download/).
 
 **`word` *(w)*:** 16 bits *(2 bytes)*.
 
-**`doubleword` *(d)*:** 32 bites *(4 bytes)*.
+**`doubleword` *(d)*:** 32 bits *(4 bytes)*.
+
+**Operating mode:** Specifies the overall picture of the processor.
+- *e.g. Maximum size of available registers, the available advanced features for the running operating system, the restrictions and so on.*
+
+**Real mode:** `16-bits` operating mode.
+
+**Protected mode:** `32-bits` operating mode.
+- *Ability to deal with `4GB` of main memory.*
+
+**Long mode:** `64-bits` operating mode.
+- *Provide more capacity for its users (e.g. Can deal with `16 exabytes` of memory).*
+
+**Process:** Program that is currently running.
+
+**Kernel-mode:** Privilege to do anything. 
+- *e.g. access any memory location, access any resource of the system and perform any operation.*
+
+**User-mode:** Restricted environment where the code that runs on it doesn’t have the privilege to perform sensitive actions.
+
+**Current Privilege Level *(CPL)*:** Privilege level of the currently running code.
+
+**Nibble:** Half a byte.
+
+**Flat memory model:** Viewing the memory as an array of contiguous cells.
+
+**Segment:** Store a bunch of related data.
+
+**Code segment:** Store the code of the program under execution.
+
+**Data segment:** Store the data of the program under execution.
+
+**Stack segment:** Store the data of program’s stack.
+
+**Offset:** Reference to a byte.
+
+**Near call *(jump)*:** Any call *(or jump)* to a code inside the same code segment of the caller.
+
+**Far call *(jump)*:** Any call *(or jump)* to a code outside the same code segment of the caller.
+
+**Global descriptor table *(GDT)*:** A data structure which is used by Intel x86-family processors starting with the `80286` for the purpose of defining the characteristics of the various memory areas *(segments)* which are used during program execution, including the **size**, the **base address**, and **access privileges** like write and executable.
+- Source: https://www.geeksforgeeks.org/what-is-global-descriptor-table/
+
+**Local descriptor table *(LDT)*:** Same functionality and structure of GDT. But multiple LDT can be defined in the system, and each one of them can be private to a specific process that is currently running on the system, also, multiple running processes can share a single LDT that is considered private for them by the kernel and no other processes can reach this given LDT.
+
+**Logical memory address:** Generated memory address.
+
+**Physical memory address:** Real memory address.
+
+**Segment limit field:** Size of a given segment.
+
+**Descriptor privilege level *(DLP)*:** Privilege level of a given segment.
+
+**Run-time heap:** Region of process’ memory that provides an area for dynamically allocated objects *(e.g. variables)*.
+
+**Run-time stack:** Region of process’ memory that is used to store the values of local variables and function parameters.
+- It’s a way to implement **function’s invocation**.
+
+**Event-driven programming:** Paradigm where the program is driven by **events**. It keeps idle and waiting for any event to occur and once an event occurs, the program starts to work by handling this event.
+
+**Handler:** Function dedicated to an event.
+
+**Non-maskable interrupts *(NMI)*:** Type of interrupts that will interrupt the execution of the current code even if the interruption is disabled.
 
 # Assembly information
 
@@ -61,8 +123,8 @@ Install [QEMU](https://www.qemu.org/download/).
   - `times 100 db 0`: *Reserves 100 bytes of the memory and fills them with 0*.
 - **`$` *(NASM's special expression)*:** Points to the beginning of the **assembly position** of the current source line.
 - **`$$` *(NASM's special expression)*:** Points to the beginning of the current **section** of assembly code.
-
-
+- **`cli` *(clear interrupt flag)*:** Disable interruption *(manipulate the interrupt flag)*.
+- **`sti` *(set interrupt flag)*:** Enable the x86 instruction cli *(manipulate the interrupt flag)*.
 
 # Resources
 - [A Journey in Creating an Operating System Kernel *(The 539kernel Book)*](https://539kernel.com/A_Journey_in_Creating_an_Operating_System_Kernel_The_539kernel_Book.pdf)
