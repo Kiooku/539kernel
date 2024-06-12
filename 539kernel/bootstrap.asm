@@ -12,6 +12,13 @@ start:
     jmp 0900h:0000
 
 load_kernel_from_disk:
+    ; Explanation page 84
+    mov ax, [curr_sector_to_load]
+    sub ax, 2
+    mov bx, 512d
+    mul bx
+    mov bx, ax
+
     mov ax, 0900h
     mov es, ax
 
@@ -19,13 +26,19 @@ load_kernel_from_disk:
     mov ah, 02h
     mov al, 01h
     mov ch, 0h
-    mov cl, 02h
+    mov cl, [curr_sector_to_load] ; Explanation page 84
     mov dh, 0h
     mov dl, 80h
-    mov bx, 0h
     int 13h
 
     jc kernel_load_error
+
+    ; Explanation page 84
+    sub byte [number_of_sectors_to_load], 1
+    add byte [curr_sector_to_load], 1
+    cmp byte [number_of_sectors_to_load], 0
+
+    jne load_kernel_from_disk
 
     ret
 
@@ -65,9 +78,11 @@ printing_finished:
 
     ret
 
-title_string        db  'The Bootloader of 539kernel.', 0
-message_string      db  'The kernel is loading...', 0
-load_error_string   db  'The kernel cannot be loaded', 0
+title_string                db  'The Bootloader of 539kernel.', 0
+message_string              db  'The kernel is loading...', 0
+load_error_string           db  'The kernel cannot be loaded', 0
+number_of_sectors_to_load   db  15d
+curr_sector_to_load         db  2d
 
 times 510-($-$$) db 0
 dw 0xAA55

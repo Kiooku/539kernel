@@ -14,6 +14,11 @@ Creation of an operating system for learning purposes following the [539kernel b
 
 Install [QEMU](https://www.qemu.org/download/).
 
+# How to use it?
+
+1. `cd 539kernel`
+2. `make`
+
 # Glossary
 
 **Bootloader:** Code that is responsible for loading the main kernel from the disk to the main memory so the kernel can be executed.
