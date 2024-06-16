@@ -2,6 +2,8 @@
 bits 16
 extern kernel_main
 extern interrupt_handler
+extern scheduler
+extern run_next_process
 
 start:
     mov ax, cs
@@ -11,14 +13,9 @@ start:
     call init_video_mode
     call enter_protected_mode
     call setup_interrupts
+    call load_task_register
 
     call 08h:start_kernel
-
-setup_interrupts:
-    call remap_pic
-    call load_idt
-
-    ret
 
 load_gdt:
     ; Explanation page 87
@@ -43,6 +40,12 @@ init_video_mode:
     mov ah, 01h ; Set the type of the cursor
     mov cx, 2000h ; Disable the text cursor
     int 10h
+
+    ret
+
+setup_interrupts:
+    call remap_pic
+    call load_idt
 
     ret
 
@@ -94,6 +97,12 @@ load_idt:
     lidt [idtr - start]
     ret
 
+load_task_register:
+    mov ax, 40d
+    ltr ax
+
+    ret
+
 bits 32
 start_kernel:
     mov eax, 10h
@@ -112,3 +121,6 @@ start_kernel:
 
 %include "gdt.asm"
 %include "idt.asm"
+
+tss:
+    dd 0

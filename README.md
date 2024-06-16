@@ -109,6 +109,26 @@ Install [QEMU](https://www.qemu.org/download/).
 
 **Non-maskable interrupts *(NMI)*:** Type of interrupts that will interrupt the execution of the current code even if the interruption is disabled.
 
+**Control register:** Contain values that determine the behavior of the processor.
+
+**Programmable Interrupt Controller *(PIC)*:** Send the interrupts of other devices *(e.g. hard disk)* to the processor. 
+- Mediator between the machine’s I/O devices and the processor.
+- **Only 8 devices** can be attached to one PIC device.
+
+**PIC remapping:** Change the default mapping between IRQs and interrupt number of the processor.
+
+**Slave PIC:** PIC attached to the master.
+
+**Master PIC:** The first PIC.
+
+**Interrupt request *(IRQ)*:** Interrupting send to the PIC.
+
+**System Timer:** Device that sends an interrupt in each unit of time *(extremely useful for multitasking environment)*.
+
+**Memory-mapped I/O:** The main memory is used to perform the communication with external devices by the processor.
+
+**Port-mapped I/O:** Communication with external devices by the processor. In this method, each device has a **ports**, each port has its own unique **number** and **job**.
+
 # Assembly information
 
 - `ESI`, `EDI`, `EBP` and `ESP` are considered as general purpose registers in x86 architecture *(according to Intel’s manual)*, they store some important data in some cases, and it’s better to use them carefully if we are forced to.
