@@ -1,5 +1,6 @@
 #include "screen.h"
 #include "scheduler.h"
+#include "heap.h"
 
 // void simulatedProcess(char[], char[]); // Need to change process_create to allow one function to create different processes
 void processA();
@@ -8,11 +9,12 @@ void processC();
 void processD();
 
 void kernel_main() {
-    process_t p1, p2, p3, p4;
-
+    heap_init();
+    paging_init();
     screen_init();
     process_init();
     scheduler_init();
+
 
     print("Welcome to 539kernel!");
     println();
@@ -21,10 +23,10 @@ void kernel_main() {
     printi(539);
     println();
 
-    process_create(&processA, &p1);
-    process_create(&processB, &p2);
-    process_create(&processC, &p3);
-    process_create(&processD, &p4);
+    process_create(&processA);
+    process_create(&processB);
+    process_create(&processC);
+    process_create(&processD);
 
     while(1);
 }

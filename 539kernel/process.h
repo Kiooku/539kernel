@@ -19,6 +19,6 @@ extern int processes_count;
 extern int curr_pid;
 
 void process_init();
-void process_create(int *, process_t *);
+void *process_create(int *);
 
 #endif

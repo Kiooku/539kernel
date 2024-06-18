@@ -4,6 +4,10 @@ extern kernel_main
 extern interrupt_handler
 extern scheduler
 extern run_next_process
+extern page_directory
+
+global load_page_directory
+global enable_paging
 
 start:
     mov ax, cs
@@ -118,6 +122,18 @@ start_kernel:
 
     call kernel_main
 
+load_page_directory:
+    mov eax, [page_directory]
+    mov cr3, eax
+
+    ret
+
+enable_paging:
+    mov eax, cr0
+    or eax, 80000000h
+    mov cr0, eax
+
+    ret
 
 %include "gdt.asm"
 %include "idt.asm"

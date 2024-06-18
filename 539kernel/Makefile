@@ -14,7 +14,9 @@ build: $(BOOTSTRAP_FILE) $(KERNEL_FILE)
 	$(CC) $(KERNEL_FLAGS) screen.c -o screen.elf
 	$(CC) $(KERNEL_FLAGS) process.c -o process.elf
 	$(CC) $(KERNEL_FLAGS) scheduler.c -o scheduler.elf
-	ld -melf_i386 -Tlinker.ld starter.o kernel.elf screen.elf process.elf scheduler.elf -o 539kernel.elf
+	$(CC) $(KERNEL_FLAGS) heap.c -o heap.elf
+	$(CC) $(KERNEL_FLAGS) paging.c -o paging.elf
+	ld -melf_i386 -Tlinker.ld starter.o kernel.elf screen.elf process.elf scheduler.elf heap.elf paging.elf -o 539kernel.elf
 	objcopy -O binary 539kernel.elf 539kernel.bin
 	dd if=bootstrap.o of=kernel.img
 	dd seek=1 conv=sync if=539kernel.bin of=kernel.img bs=512 count=8
@@ -24,4 +26,4 @@ build: $(BOOTSTRAP_FILE) $(KERNEL_FILE)
 clean:
 	rm -f *.o
 	rm -f kernel.elf kernel.img 539kernel.bin 539kernel.elf
-	rm -f screen.elf process.elf scheduler.elf
+	rm -f screen.elf process.elf scheduler.elf heap.elf paging.elf

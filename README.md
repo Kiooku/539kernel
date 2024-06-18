@@ -129,6 +129,15 @@ Install [QEMU](https://www.qemu.org/download/).
 
 **Port-mapped I/O:** Communication with external devices by the processor. In this method, each device has a **ports**, each port has its own unique **number** and **job**.
 
+**Demand paging:** Memory management technique used in virtual memory systems where pages enter main memory only when requested or needed by the CPU.
+- *Source: https://www.geeksforgeeks.org/what-is-demand-paging-in-operating-system/*
+
+**Swapping operation:** When the main memory is full and a page is needed to be loaded, a page frames is chosen to be removed from the main memory *(**victim frame**)*, its content is written into the disk *(**swapped out**)*, and its place in the main memory is used for the new page that should be loaded.
+
+**Least recently used *(LRU)*:** Algorithm that selects the oldest element based on a time metric.
+
+**Translation lookaside buffer *(TLB)*:** Cache used for ***page directory*** and ***page tables***.
+
 # Assembly information
 
 - `ESI`, `EDI`, `EBP` and `ESP` are considered as general purpose registers in x86 architecture *(according to Intel’s manual)*, they store some important data in some cases, and it’s better to use them carefully if we are forced to.
