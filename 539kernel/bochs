@@ -1,0 +1,15 @@
+plugin_ctrl: unmapped=1, biosdev=1, speaker=1, extfpuirq=1, parallel=1, serial=1, gameport=1, iodebug=1
+config_interface: textconfig
+display_library: x, options="gui_debug"
+memory: host=32, guest=32
+romimage: file="/usr/share/bochs/BIOS-bochs-latest"
+vgaromimage: file="/usr/share/bochs/VGABIOS-lgpl-latest"
+boot: disk
+ata0: enabled=1, ioaddr1=0x1f0, ioaddr2=0x3f0, irq=14
+ata0-master: type=disk, mode=flat, translation=auto, path="kernel.img", cylinders=2, heads=16, spt=63, biosdetect=auto, model="Generic 1234"
+pci: enabled=1, chipset=i440fx
+vga: extension=vbe, update_freq=5
+cpu: count=1, ips=4000000, model=bx_generic, reset_on_triple_fault=1, cpuid_limit_winnt=0, ignore_bad_msrs=1, mwait_is_nop=0
+cpuid: family=6, model=0x03, stepping=3, mmx=1, apic=xapic, sep=1, mwait=1, x86_64=1, vmx=1
+cpuid: vendor_string="GenuineIntel"
+cpuid: brand_string="              Intel(R) Pentium(R) 4 CPU        "

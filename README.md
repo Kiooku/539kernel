@@ -1,9 +1,6 @@
 # 539kernel
 Creation of an operating system for learning purposes following the [539kernel book](https://539kernel.com/).
 
-> [!WARNING]
-> Work in progress
-
 # Table of Contents
 1. [Prerequisite](#prerequisite)
 2. [Glossary](#glossary)
@@ -12,7 +9,13 @@ Creation of an operating system for learning purposes following the [539kernel b
 
 # Prerequisite
 
-Install [QEMU](https://www.qemu.org/download/).
+~~Install [QEMU](https://www.qemu.org/download/).~~
+
+Install [Bochs](https://bochs.sourceforge.io/)
+
+**Linux:**
+1. `sudo apt update`
+2. `sudo apt install bochs bochs-x bochsbios vgabios`
 
 # How to use it?
 

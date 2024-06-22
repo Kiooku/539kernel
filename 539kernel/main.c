@@ -8,13 +8,15 @@ void processB();
 void processC();
 void processD();
 
+void print_fs();
+
 void kernel_main() {
     heap_init();
     paging_init();
     screen_init();
     process_init();
     scheduler_init();
-
+    filesystem_init();
 
     print("Welcome to 539kernel!");
     println();
@@ -28,13 +30,49 @@ void kernel_main() {
     process_create(&processC);
     process_create(&processD);
 
+    char *data = kalloc(512);
+    strcpy(data, "The content of the first file on 539filesystem");
+    create_file("first_file", data);
+
+    char *data2 = kalloc( 512 );
+    strcpy( data2, "SECOND FILE in 539filesystem" );
+    create_file( "second_file", data2 );
+
+    char *data3 = kalloc( 512 );
+    strcpy( data3, "THIRD FILE in 539filesystem" );
+    create_file( "third_file", data3 );
+
+    print( read_file( "first_file" ) );
+    println();
+    print( read_file( "second_file" ) );
+    println();
+    print( read_file( "third_file" ) );
+    println();
+
+    print_fs();
+    delete_file( "second_file" );
+    print_fs();
+
     while(1);
 }
 
-void interrupt_handler(int interrupt_number) {
+void print_fs() {
+    char **files = list_files();
+
+    for (int currIdx = 0; currIdx < get_files_number(); currIdx++) {
+        print("File: ");
+        print(files[currIdx]);
+        println();
+    }
+
+    print("==");
     println();
-    print("Interrupt Received ");
-    printi(interrupt_number);
+}
+
+void interrupt_handler(int interrupt_number) {
+    //println();
+    //print("Interrupt Received ");
+    //printi(interrupt_number);
 }
 /*
 void simulatedProcess(char processName[], char asmInstruction[]) {
